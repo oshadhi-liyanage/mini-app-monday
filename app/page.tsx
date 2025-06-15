@@ -6,7 +6,7 @@ const appUrl = env.NEXT_PUBLIC_URL;
 
 const frame = {
   version: "next",
-  imageUrl: `${appUrl}/images/feed.png`,
+  imageUrl: `${appUrl}/images/image.png`,
   button: {
     title: "Launch App",
     action: {
