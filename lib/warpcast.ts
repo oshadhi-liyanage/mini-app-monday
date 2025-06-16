@@ -34,7 +34,7 @@ export async function getFarcasterManifest() {
       buttonTitle: `Launch App`,
       splashImageUrl: `${appUrl}/images/miniapp_monday_splash.png`,
       splashBackgroundColor: "#FFFFFF",
-      webhookUrl: `${appUrl}/api/webhook`,
+      webhookUrl: `https://api.neynar.com/f/app/a8d4ab71-5417-406b-aef2-9991b7179618/event`,
       // Metadata https://github.com/farcasterxyz/miniapps/discussions/191
       subtitle: "Miniapp monday", // 30 characters, no emojis or special characters, short description under app name
       description: "Miniapp monday", // 170 characters, no emojis or special characters, promotional message displayed on Mini App Page
