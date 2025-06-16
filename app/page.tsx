@@ -6,15 +6,15 @@ const appUrl = env.NEXT_PUBLIC_URL;
 
 const frame = {
   version: "next",
-  imageUrl: `${appUrl}/images/miniappmonday.png`,
+  imageUrl: `${appUrl}/images/mam_icon_url.png`,
   button: {
     title: "Launch App",
     action: {
       type: "launch_frame",
       name: "MM",
       url: appUrl,
-      splashImageUrl: `${appUrl}/images/miniapp_monday_splash.png`,
-      splashBackgroundColor: "#ffffff",
+      splashImageUrl: `${appUrl}/images/mam_splash_img.png`,
+      splashBackgroundColor: "#D397F8",
     },
   },
 };

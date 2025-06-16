@@ -48,7 +48,7 @@ export async function getFarcasterManifest() {
       //   `${appUrl}/images/feed.png`,
       // ],
       heroImageUrl: `${appUrl}/images/hero_image_url.png`, // 1200 x 630px (1.91:1), promotional display image on top of the mini app store
-      ogImageUrl: `${appUrl}/images/mam_hero_image.png`, // 1200 x 630px (1.91:1), promotional image, same as app hero image
+      ogImageUrl: `${appUrl}/images/hero_image_url.png`, // 1200 x 630px (1.91:1), promotional image, same as app hero image
       noindex: noindex,
     },
   };
