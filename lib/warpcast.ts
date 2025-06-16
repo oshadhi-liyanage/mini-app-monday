@@ -39,7 +39,7 @@ export async function getFarcasterManifest() {
       subtitle: "Miniapp monday", // 30 characters, no emojis or special characters, short description under app name
       description: "Miniapp monday", // 170 characters, no emojis or special characters, promotional message displayed on Mini App Page
       primaryCategory: "social",
-      tags: ["mini-app", "miniapp-monday"], // up to 5 tags, filtering/search tags
+      tags: ["miniapp", "miniapp-monday"], // up to 5 tags, filtering/search tags
       tagline: "Miniapp monday ", // 30 characters, marketing tagline should be punchy and descriptive
       ogTitle: `${frameName}`, // 30 characters, app name + short tag, Title case, no emojis
       ogDescription: "Miniapp monday", // 100 characters, summarize core benefits in 1-2 lines
