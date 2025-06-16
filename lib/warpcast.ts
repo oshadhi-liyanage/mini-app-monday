@@ -6,7 +6,7 @@ import { env } from "@/lib/env";
  * @returns The farcaster manifest for the frame
  */
 export async function getFarcasterManifest() {
-  let frameName = "Mini App Monday";
+  let frameName = "MiniApp Monday";
   let noindex = false;
   const appUrl = env.NEXT_PUBLIC_URL;
   if (appUrl.includes("localhost")) {
@@ -36,13 +36,13 @@ export async function getFarcasterManifest() {
       splashBackgroundColor: "#FFFFFF",
       webhookUrl: `${appUrl}/api/webhook`,
       // Metadata https://github.com/farcasterxyz/miniapps/discussions/191
-      subtitle: "Mini app monday", // 30 characters, no emojis or special characters, short description under app name
-      description: "Mini app mondays", // 170 characters, no emojis or special characters, promotional message displayed on Mini App Page
+      subtitle: "Miniapp monday", // 30 characters, no emojis or special characters, short description under app name
+      description: "Miniapp monday", // 170 characters, no emojis or special characters, promotional message displayed on Mini App Page
       primaryCategory: "social",
       tags: ["mini-app", "mini-app-monday"], // up to 5 tags, filtering/search tags
-      tagline: "Mini app monday ", // 30 characters, marketing tagline should be punchy and descriptive
+      tagline: "Miniapp monday ", // 30 characters, marketing tagline should be punchy and descriptive
       ogTitle: `${frameName}`, // 30 characters, app name + short tag, Title case, no emojis
-      ogDescription: "Mini app monday", // 100 characters, summarize core benefits in 1-2 lines
+      ogDescription: "Miniapp monday", // 100 characters, summarize core benefits in 1-2 lines
       // screenshotUrls: [
       //   // 1284 x 2778, visual previews of the app, max 3 screenshots
       //   `${appUrl}/images/feed.png`,

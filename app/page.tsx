@@ -11,7 +11,7 @@ const frame = {
     title: "Launch App",
     action: {
       type: "launch_frame",
-      name: "MAM",
+      name: "MM",
       url: appUrl,
       splashImageUrl: `${appUrl}/images/miniapp_monday_splash.png`,
       splashBackgroundColor: "#ffffff",
@@ -21,10 +21,10 @@ const frame = {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "MAM",
+    title: "MM",
     openGraph: {
-      title: "MAM",
-      description: "Mini app Monday",
+      title: "MM",
+      description: "Miniapp Monday",
     },
     other: {
       "fc:frame": JSON.stringify(frame),

@@ -61,7 +61,7 @@ export default function Home() {
             <h1
               className={`text-4xl font-bold text-purple-700 ${londrina.className}`}
             >
-              MAM
+              MM
             </h1>
             {isSignedIn && user && (
               <div className="flex items-center gap-2">
