@@ -1,5 +1,5 @@
 "use client";
-import { AddMiniAppResult } from "@farcaster/frame-core/dist/actions/addMiniApp";
+import { AddMiniApp } from "@farcaster/frame-core";
 import { FrameContext } from "@farcaster/frame-core/dist/context";
 import { sdk } from "@farcaster/frame-sdk";
 import {
@@ -16,7 +16,7 @@ interface MiniAppContextType {
   isMiniAppReady: boolean;
   context: FrameContext | null;
   setMiniAppReady: () => void;
-  addMiniApp: () => Promise<AddMiniAppResult | null>;
+  addMiniApp: () => Promise<AddMiniApp.AddMiniAppResult | null>;
 }
 
 const MiniAppContext = createContext<MiniAppContextType | undefined>(undefined);
