@@ -33,6 +33,15 @@ export function MiniAppsList() {
     autoSignIn: true,
   });
 
+  const getDomainFromUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname;
+    } catch (e) {
+      return url;
+    }
+  };
+
   const {
     data,
     isLoading,
@@ -175,7 +184,9 @@ export function MiniAppsList() {
             <button
               onClick={() =>
                 sdk.actions.openUrl(
-                  `https://farcaster.xyz/?launchFrameUrl=${app.frameUrl}`
+                  `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
+                    app.frameUrl
+                  )}`
                 )
               }
               className="text-sm text-blue-600 hover:text-blue-800"
