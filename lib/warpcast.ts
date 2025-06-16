@@ -28,12 +28,12 @@ export async function getFarcasterManifest() {
     frame: {
       version: "1",
       name: frameName,
-      iconUrl: `${appUrl}/images/miniappmonday.png`,
+      iconUrl: `${appUrl}/images/mam_icon_url.png`,
       homeUrl: appUrl,
-      imageUrl: `${appUrl}/images/miniappmonday.png`,
+      imageUrl: `${appUrl}/images/mam_icon_url.png`,
       buttonTitle: `Launch App`,
-      splashImageUrl: `${appUrl}/images/miniapp_monday_splash.png`,
-      splashBackgroundColor: "#FFFFFF",
+      splashImageUrl: `${appUrl}/images/mam_splash_img.png`,
+      splashBackgroundColor: "#D397F8",
       webhookUrl: `https://api.neynar.com/f/app/a8d4ab71-5417-406b-aef2-9991b7179618/event`,
       // Metadata https://github.com/farcasterxyz/miniapps/discussions/191
       subtitle: "Miniapp monday", // 30 characters, no emojis or special characters, short description under app name
@@ -47,7 +47,7 @@ export async function getFarcasterManifest() {
       //   // 1284 x 2778, visual previews of the app, max 3 screenshots
       //   `${appUrl}/images/feed.png`,
       // ],
-      heroImageUrl: `${appUrl}/images/mam_hero_image.png`, // 1200 x 630px (1.91:1), promotional display image on top of the mini app store
+      heroImageUrl: `${appUrl}/images/hero_image_url.png`, // 1200 x 630px (1.91:1), promotional display image on top of the mini app store
       ogImageUrl: `${appUrl}/images/mam_hero_image.png`, // 1200 x 630px (1.91:1), promotional image, same as app hero image
       noindex: noindex,
     },
