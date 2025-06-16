@@ -172,14 +172,16 @@ export function MiniAppsList() {
             <CardDescription>{app.description}</CardDescription>
           </CardHeader>
           <CardContent className="flex items-center justify-between">
-            <a
-              href={`https://farcaster.xyz/?launchFrameUrl=${app.frameUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() =>
+                sdk.actions.openUrl(
+                  `https://farcaster.xyz/?launchFrameUrl=${app.frameUrl}`
+                )
+              }
               className="text-sm text-blue-600 hover:text-blue-800"
             >
               View Mini App →
-            </a>
+            </button>
             <Image
               src={
                 app.frame ? JSON.parse(app.frame)?.author?.pfp_url || "" : ""
