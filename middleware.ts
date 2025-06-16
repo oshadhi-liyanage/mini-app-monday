@@ -44,7 +44,7 @@ export default async function middleware(req: NextRequest) {
 
     // Clone the request headers to add user info
     const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-user-fid", payload.sub);
+    requestHeaders.set("x-user-fid", payload.sub!); // Assert non-null since we've verified the token
 
     // Return response with modified headers
     return NextResponse.next({

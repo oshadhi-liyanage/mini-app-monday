@@ -1,5 +1,5 @@
 "use client";
-import { AddFrameResult } from "@farcaster/frame-core/dist/actions/addFrame";
+import { AddMiniAppResult } from "@farcaster/frame-core/dist/actions/addMiniApp";
 import { FrameContext } from "@farcaster/frame-core/dist/context";
 import { sdk } from "@farcaster/frame-sdk";
 import {
@@ -16,7 +16,7 @@ interface MiniAppContextType {
   isMiniAppReady: boolean;
   context: FrameContext | null;
   setMiniAppReady: () => void;
-  addMiniApp: () => Promise<AddFrameResult | null>;
+  addMiniApp: () => Promise<AddMiniAppResult | null>;
 }
 
 const MiniAppContext = createContext<MiniAppContextType | undefined>(undefined);
@@ -36,7 +36,7 @@ export function MiniAppProvider({
     try {
       const context = await sdk.context;
       if (context) {
-        setContext(context);
+        setContext(context as unknown as FrameContext);
       } else {
         setError("Failed to load Farcaster context");
       }

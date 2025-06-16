@@ -13,15 +13,14 @@ export interface NeynarUser {
 }
 
 export const fetchUser = async (fid: string): Promise<NeynarUser> => {
-  console.log("came here11111111111111111111111111111111111111111111");
-  console.log("fid", fid);
   const existingUser = await db.query.usersTable.findFirst({
+    // @ts-ignore
     where: eq(usersTable.fid, fid),
   });
-  console.log("existingUser", existingUser);
 
   if (existingUser) {
     return {
+      // @ts-ignore
       fid: existingUser.fid,
       username: existingUser.username,
       display_name: existingUser.displayName,
@@ -30,7 +29,6 @@ export const fetchUser = async (fid: string): Promise<NeynarUser> => {
       verifications: existingUser.verifications as string[],
     };
   }
-  console.log("came here99999999999999999999999999999999999999999999");
   // If user doesn't exist, fetch from Neynar
   const response = await fetch(
     `https://api.neynar.com/v2/farcaster/user/bulk?fids=${fid}`,
