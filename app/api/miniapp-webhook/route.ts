@@ -19,6 +19,7 @@ export async function POST(request: Request) {
     // Verify this is a cast.created event with your target phrase
     if (
       webhookData.type === "cast.created" &&
+      webhookData.author.fid == "1058287" &&
       webhookData.data.text.includes("miniapp")
     ) {
       // Send notification to all mini app users
