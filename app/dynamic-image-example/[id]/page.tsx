@@ -31,10 +31,10 @@ export async function generateMetadata({
   };
 
   return {
-    title: "MiniApp Monday",
+    title: "Miniapp Monday",
     openGraph: {
-      title: "MiniApp Monday",
-      description: "MiniApp Monday",
+      title: "Miniapp Monday",
+      description: "Miniapp Monday",
       images: [{ url: imageUrl.toString() }],
     },
     other: {
