@@ -7,20 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { SelectMiniApp } from "@/db/schema";
 import { useQuickAuth } from "@/hooks/use-quick-auth";
 import { sdk } from "@farcaster/frame-sdk";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useRef, useCallback } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../ui/carousel";
+import { useRef, useCallback, useState } from "react";
 
 interface MiniAppsResponse {
   items: SelectMiniApp[];
@@ -28,10 +22,14 @@ interface MiniAppsResponse {
   hasMore: boolean;
 }
 
+type SeasonType = "this-week" | "last-week" | "all";
+
 export function MiniAppsList() {
   const { isSignedIn } = useQuickAuth({
     autoSignIn: true,
   });
+
+  const [activeTab, setActiveTab] = useState<SeasonType>("this-week");
 
   const getDomainFromUrl = (url: string) => {
     try {
@@ -50,13 +48,15 @@ export function MiniAppsList() {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<MiniAppsResponse>({
-    queryKey: ["miniApps"],
+    queryKey: ["miniApps", activeTab],
     queryFn: async ({ pageParam = null }) => {
       // Get Quick Auth token
       const { token } = await sdk.quickAuth.getToken();
 
       const response = await fetch(
-        `/api/mini-apps${pageParam ? `?cursor=${pageParam}` : ""}`,
+        `/api/mini-apps/season?season=${activeTab}${
+          pageParam ? `&cursor=${pageParam}` : ""
+        }`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -97,62 +97,8 @@ export function MiniAppsList() {
     return null;
   }
 
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {[...Array(3)].map((_, i) => (
-          <Skeleton key={i} className="w-full h-72" />
-        ))}
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="text-red-500">Error loading mini apps</div>;
-  }
-
-  const miniApps = data?.pages.flatMap((page) => page.items) ?? [];
-
-  return (
+  const renderMiniAppsGrid = (miniApps: SelectMiniApp[]) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {/* <Carousel className="h-72 w-full">
-        <CarouselContent>
-          {miniApps.map(
-            (app) => (
-              console.log(app),
-              (
-                <CarouselItem key={app.id}>
-                  <Card>
-                    <div className="relative w-full h-48">
-                      <Image
-                        src={app.image || "/placeholder-app.png"}
-                        alt={app.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardHeader>
-                      <CardTitle>{app.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <a
-                        href={`https://farcaster.xyz/?launchFrameUrl=${app.frameUrl}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-600 hover:text-blue-800"
-                      >
-                        View Mini App →
-                      </a>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              )
-            )
-          )}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel> */}
       {miniApps.map((app) => (
         <Card
           key={app.id}
@@ -216,6 +162,82 @@ export function MiniAppsList() {
           </div>
         )}
       </div>
+    </div>
+  );
+
+  const renderLoadingState = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {[...Array(3)].map((_, i) => (
+        <Skeleton key={i} className="w-full h-72" />
+      ))}
+    </div>
+  );
+
+  const renderErrorState = () => (
+    <div className="text-red-500 p-6">Error loading mini apps</div>
+  );
+
+  const renderEmptyState = () => (
+    <div className="text-center text-muted-foreground p-6">
+      No mini apps found for this period.
+    </div>
+  );
+
+  return (
+    <div className="w-full">
+      <Tabs
+        value={activeTab}
+        onValueChange={(value) => setActiveTab(value as SeasonType)}
+        className="mt-6"
+      >
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="this-week">This Week</TabsTrigger>
+          <TabsTrigger value="last-week">Last Week</TabsTrigger>
+          <TabsTrigger value="all">All Time</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="this-week" className="mt-6">
+          {isLoading
+            ? renderLoadingState()
+            : error
+            ? renderErrorState()
+            : (() => {
+                const miniApps =
+                  data?.pages.flatMap((page) => page.items) ?? [];
+                return miniApps.length > 0
+                  ? renderMiniAppsGrid(miniApps)
+                  : renderEmptyState();
+              })()}
+        </TabsContent>
+
+        <TabsContent value="last-week" className="mt-6">
+          {isLoading
+            ? renderLoadingState()
+            : error
+            ? renderErrorState()
+            : (() => {
+                const miniApps =
+                  data?.pages.flatMap((page) => page.items) ?? [];
+                return miniApps.length > 0
+                  ? renderMiniAppsGrid(miniApps)
+                  : renderEmptyState();
+              })()}
+        </TabsContent>
+
+        <TabsContent value="all" className="mt-6">
+          {isLoading
+            ? renderLoadingState()
+            : error
+            ? renderErrorState()
+            : (() => {
+                const miniApps =
+                  data?.pages.flatMap((page) => page.items) ?? [];
+                return miniApps.length > 0
+                  ? renderMiniAppsGrid(miniApps)
+                  : renderEmptyState();
+              })()}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
