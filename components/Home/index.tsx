@@ -75,8 +75,8 @@ export default function Home() {
             <Image
               src="/images/mam_icon_url.png"
               alt="Logo"
-              width={100}
-              height={100}
+              width={50}
+              height={50}
             />
             {isSignedIn && user && (
               <div className="flex items-center gap-2">
@@ -136,16 +136,15 @@ export default function Home() {
             </TabsContent>
 
             <TabsContent value="hot-picks" className="mt-0">
-              <div className="mt-12">
+              <div className="mt-4">
                 <div className="text-center mb-8">
                   <h2
                     className={`text-3xl font-bold mb-4 ${londrina.className}`}
                   >
-                    Try Your Luck! 🎰
+                    Discover your next favorite mini app! 🎲
                   </h2>
                   <p className="text-gray-600 max-w-md mx-auto">
-                    Spin the wheel and see what you win! You have 5 attempts to
-                    try your luck.
+                    Spin the wheel to discover a new mini app!
                   </p>
                 </div>
                 <div className="flex justify-center">

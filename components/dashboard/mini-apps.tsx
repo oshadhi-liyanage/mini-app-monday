@@ -141,57 +141,7 @@ export function MiniAppsList() {
             >
               View MiniApp
             </button>
-            <button
-              className="text-blue-600"
-              onClick={() => {
-                sdk.actions.openUrl(
-                  `https://farcaster.xyz/~/mini-apps/launch?domain=www.tip.md&app_frames_url=https://${getDomainFromUrl(
-                    app.frameUrl
-                  )}`
-                );
-              }}
-            >
-              {/* <span className="text-2xl">📲</span>
-              Tip App */}
-              <svg
-                width="56"
-                height="24"
-                viewBox="0 0 56 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Background rectangle */}
-                <rect width="56" height="24" rx="5" fill="#161622" />
-
-                {/* T logo circle */}
-                <circle cx="14.4" cy="12" r="7.2" fill="#7E62E7" />
-
-                {/* T letter */}
-                <text
-                  x="14.4"
-                  y="13.2"
-                  fontFamily="JetBrains Mono"
-                  fontSize="17.5"
-                  fill="white"
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >
-                  t
-                </text>
-
-                {/* "Tip" text */}
-                <text
-                  x="28"
-                  y="15.6"
-                  fontFamily="Arial, sans-serif"
-                  fontSize="11"
-                  fontWeight="500"
-                  fill="white"
-                >
-                  Tip
-                </text>
-              </svg>
-            </button>
+            {/*  */}
             <Image
               src={
                 app.frame ? JSON.parse(app.frame)?.author?.pfp_url || "" : ""

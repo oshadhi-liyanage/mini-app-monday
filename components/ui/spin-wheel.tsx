@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import { useApiQuery } from "@/hooks/use-api-query";
 import { AppWindow } from "lucide-react";
+import { sdk } from "@farcaster/frame-sdk";
 
 interface MiniApp {
   id: string;
@@ -52,7 +53,7 @@ const scamValues = [0.59, 0.85, 1.7, 2.3, 2.9, 3.5, 2.9, 2.4, 3.9, 2.7];
 
 export function SpinWheel({
   className,
-  maxAttempts = 5,
+  maxAttempts = 8,
   onSpin,
 }: SpinWheelProps) {
   const [attempts, setAttempts] = useState(maxAttempts);
@@ -60,6 +61,7 @@ export function SpinWheel({
   const [result, setResult] = useState<string>("");
   const [rotation, setRotation] = useState(0);
   const [clicks, setClicks] = useState(0);
+  const [winningMiniApp, setWinningMiniApp] = useState<MiniApp | null>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
 
   // Fetch mini apps from the API
@@ -99,11 +101,22 @@ export function SpinWheel({
   }, [miniAppsData]);
   //   console.log("wheel", wheelSections);
 
+  const getDomainFromUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      console.log(urlObj.hostname);
+      return urlObj.hostname;
+    } catch (e) {
+      return url;
+    }
+  };
+
   const handleSpin = useCallback(() => {
     if (attempts <= 0 || isSpinning) return;
 
     setIsSpinning(true);
     setResult("");
+    setWinningMiniApp(null);
 
     const newClicks = clicks + 1;
     setClicks(newClicks);
@@ -137,6 +150,7 @@ export function SpinWheel({
     setTimeout(() => {
       if (winningSection) {
         setResult(winningSection.prize);
+        setWinningMiniApp(winningSection.miniApp || null);
         onSpin?.(winningSection.prize, winningSection.miniApp);
       }
       setIsSpinning(false);
@@ -148,6 +162,7 @@ export function SpinWheel({
     setClicks(0);
     setRotation(0);
     setResult("");
+    setWinningMiniApp(null);
     setIsSpinning(false);
   };
 
@@ -182,12 +197,44 @@ export function SpinWheel({
   return (
     <div className={cn("flex flex-col items-center space-y-6", className)}>
       <div className="text-center space-y-2">
-        <div className="text-lg font-semibold text-gray-700">
-          Attempts Remaining: {attempts}
-        </div>
         {result && (
-          <div className="text-lg font-bold text-green-600 bg-green-50 px-4 py-2 rounded-lg">
-            {result}
+          <div className="text-lg font-bold text-green-600 bg-green-50 px-4 py-2 rounded-lg space-y-3">
+            <div>{result}</div>
+            {winningMiniApp && (
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() =>
+                    sdk.actions.openUrl(
+                      `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
+                        winningMiniApp.frameUrl
+                      )}`
+                    )
+                  }
+                  className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Open Miniapp
+                </button>
+                <button
+                  onClick={async () => {
+                    try {
+                      await sdk.actions.composeCast({
+                        text: `Just discovered ${winningMiniApp.title} on the Miniapp Monday spin wheel! Try it out! 👇`,
+                        embeds: [
+                          "https://farcaster.xyz/miniapps/2_-h28xamTWj/miniapp-monday",
+                          winningMiniApp.frameUrl,
+                        ],
+                        channelKey: "miniapps",
+                      });
+                    } catch (error) {
+                      console.error("Failed to compose cast:", error);
+                    }
+                  }}
+                  className="px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  Share Cast
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -314,31 +361,6 @@ export function SpinWheel({
           />
         </div>
       </div>
-
-      {/* Controls */}
-      <div className="flex gap-4">
-        <Button
-          onClick={handleSpin}
-          disabled={attempts <= 0 || isSpinning}
-          variant="default"
-          size="lg"
-        >
-          {isSpinning ? "Spinning..." : "Spin Wheel"}
-        </Button>
-        <Button onClick={resetWheel} variant="outline" size="lg">
-          Reset
-        </Button>
-      </div>
-
-      {/* Mini Apps Info */}
-      {miniAppsData?.items && miniAppsData.items.length > 0 && (
-        <div className="text-center text-sm text-gray-600 mt-4">
-          <p>Discovering {miniAppsData.items.length} mini apps!</p>
-          <p className="text-xs mt-1">
-            Each spin reveals a different mini app from the collection
-          </p>
-        </div>
-      )}
     </div>
   );
 }
