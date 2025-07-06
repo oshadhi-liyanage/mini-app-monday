@@ -31,7 +31,7 @@ export async function getFarcasterManifest() {
       iconUrl: `${appUrl}/images/mam_icon_url.png`,
       homeUrl: appUrl,
       imageUrl: `${appUrl}/images/mam_icon_url.png`,
-      buttonTitle: `Launch App`,
+      buttonTitle: `Discover Miniapps`,
       splashImageUrl: `${appUrl}/images/mam_splash_img.png`,
       splashBackgroundColor: "#D397F8",
       webhookUrl: `https://api.neynar.com/f/app/a8d4ab71-5417-406b-aef2-9991b7179618/event`,
