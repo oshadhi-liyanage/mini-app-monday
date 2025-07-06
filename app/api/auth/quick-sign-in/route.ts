@@ -8,6 +8,8 @@ const client = createClient();
 
 export async function POST(req: NextRequest) {
   try {
+    console.log("req came to quick-signin");
+    console.log("req.headers", req.headers);
     const authorization = req.headers.get("Authorization");
     if (!authorization || !authorization.startsWith("Bearer ")) {
       return NextResponse.json({ error: "Missing token" }, { status: 401 });

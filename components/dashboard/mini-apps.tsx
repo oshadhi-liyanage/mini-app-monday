@@ -15,6 +15,7 @@ import { useQuickAuth } from "@/hooks/use-quick-auth";
 import { sdk } from "@farcaster/frame-sdk";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRef, useCallback, useState } from "react";
+import { SmartphoneIcon } from "lucide-react";
 
 interface MiniAppsResponse {
   items: SelectMiniApp[];
@@ -34,6 +35,7 @@ export function MiniAppsList() {
   const getDomainFromUrl = (url: string) => {
     try {
       const urlObj = new URL(url);
+      console.log(urlObj.hostname);
       return urlObj.hostname;
     } catch (e) {
       return url;
@@ -137,7 +139,58 @@ export function MiniAppsList() {
               }
               className="text-sm text-blue-600 hover:text-blue-800"
             >
-              View Mini App →
+              View MiniApp
+            </button>
+            <button
+              className="text-blue-600"
+              onClick={() => {
+                sdk.actions.openUrl(
+                  `https://farcaster.xyz/~/mini-apps/launch?domain=www.tip.md&app_frames_url=https://${getDomainFromUrl(
+                    app.frameUrl
+                  )}`
+                );
+              }}
+            >
+              {/* <span className="text-2xl">📲</span>
+              Tip App */}
+              <svg
+                width="56"
+                height="24"
+                viewBox="0 0 56 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Background rectangle */}
+                <rect width="56" height="24" rx="5" fill="#161622" />
+
+                {/* T logo circle */}
+                <circle cx="14.4" cy="12" r="7.2" fill="#7E62E7" />
+
+                {/* T letter */}
+                <text
+                  x="14.4"
+                  y="13.2"
+                  fontFamily="JetBrains Mono"
+                  fontSize="17.5"
+                  fill="white"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  t
+                </text>
+
+                {/* "Tip" text */}
+                <text
+                  x="28"
+                  y="15.6"
+                  fontFamily="Arial, sans-serif"
+                  fontSize="11"
+                  fontWeight="500"
+                  fill="white"
+                >
+                  Tip
+                </text>
+              </svg>
             </button>
             <Image
               src={
@@ -184,7 +237,7 @@ export function MiniAppsList() {
   );
 
   return (
-    <div className="w-full">
+    <div className="px-4">
       <Tabs
         value={activeTab}
         onValueChange={(value) => setActiveTab(value as SeasonType)}

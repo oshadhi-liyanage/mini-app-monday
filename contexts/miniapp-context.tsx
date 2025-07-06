@@ -53,6 +53,7 @@ export function MiniAppProvider({
     if (!isMiniAppReady) {
       setMiniAppReady().then(() => {
         console.log("MiniApp loaded");
+        sdk.back.enableWebNavigation();
       });
     }
   }, [isMiniAppReady, setMiniAppReady]);
