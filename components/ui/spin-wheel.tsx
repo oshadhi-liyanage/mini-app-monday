@@ -212,7 +212,7 @@ export function SpinWheel({
                   }
                   className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Open Miniapp
+                  🚀 Open Miniapp
                 </button>
                 <button
                   onClick={async () => {
@@ -231,7 +231,7 @@ export function SpinWheel({
                   }}
                   className="px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
                 >
-                  Share Cast
+                  📢 Share Cast
                 </button>
               </div>
             )}
@@ -322,9 +322,9 @@ export function SpinWheel({
               "disabled:opacity-50 disabled:cursor-not-allowed",
               isSpinning && "animate-pulse"
             )}
-            style={{
-              textShadow: "0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3)",
-            }}
+            // style={{
+            //   textShadow: "0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3)",
+            // }}
           >
             <div className="relative">
               SPIN
