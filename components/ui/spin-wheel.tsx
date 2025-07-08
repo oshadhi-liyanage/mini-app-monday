@@ -49,8 +49,6 @@ const wheelColors = [
   "#636e72", // Gray
 ];
 
-const scamValues = [0.59, 0.85, 1.7, 2.3, 2.9, 3.5, 2.9, 2.4, 3.9, 2.7];
-
 export function SpinWheel({
   className,
   maxAttempts = 8,
@@ -122,7 +120,8 @@ export function SpinWheel({
     setClicks(newClicks);
 
     const baseDegree = 1800;
-    const extraDegree = Math.floor(scamValues[attempts - 1] * 100);
+    // Generate a random angle between 0 and 360 degrees for true randomness
+    const extraDegree = Math.floor(Math.random() * 360);
     const totalDegree = baseDegree * newClicks + extraDegree;
 
     setRotation(totalDegree);
