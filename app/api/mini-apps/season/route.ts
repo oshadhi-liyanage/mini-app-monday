@@ -78,10 +78,7 @@ export async function GET(request: Request) {
         .limit(1);
 
       if (cursorItem.length > 0) {
-        whereClause = and(
-          lt(miniAppsTable.createdAt, cursorItem[0].createdAt),
-          lt(miniAppsTable.id, cursor)
-        );
+        whereClause = lt(miniAppsTable.createdAt, cursorItem[0].createdAt);
       }
     }
 
