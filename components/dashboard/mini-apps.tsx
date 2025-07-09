@@ -15,7 +15,7 @@ import { useQuickAuth } from "@/hooks/use-quick-auth";
 import { sdk } from "@farcaster/frame-sdk";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRef, useCallback, useState } from "react";
-import { SmartphoneIcon } from "lucide-react";
+import { sdk as miniAppSdk } from "@farcaster/miniapp-sdk";
 
 interface MiniAppsResponse {
   items: SelectMiniApp[];
@@ -131,11 +131,11 @@ export function MiniAppsList() {
           <CardContent className="flex items-center justify-between">
             <button
               onClick={() =>
-                sdk.actions.openUrl(
-                  `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
+                miniAppSdk.actions.openMiniApp({
+                  url: `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
                     app.frameUrl
-                  )}`
-                )
+                  )}`,
+                })
               }
               className="text-sm text-blue-600 hover:text-blue-800"
             >

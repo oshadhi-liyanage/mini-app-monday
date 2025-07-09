@@ -6,6 +6,7 @@ import { Button } from "./button";
 import { useApiQuery } from "@/hooks/use-api-query";
 import { AppWindow } from "lucide-react";
 import { sdk } from "@farcaster/frame-sdk";
+import { sdk as miniAppSdk } from "@farcaster/miniapp-sdk";
 
 interface MiniApp {
   id: string;
@@ -203,11 +204,11 @@ export function SpinWheel({
               <div className="flex justify-center gap-3">
                 <button
                   onClick={() =>
-                    sdk.actions.openUrl(
-                      `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
+                    miniAppSdk.actions.openMiniApp({
+                      url: `https://farcaster.xyz/~/mini-apps/launch?domain=${getDomainFromUrl(
                         winningMiniApp.frameUrl
-                      )}`
-                    )
+                      )}`,
+                    })
                   }
                   className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
