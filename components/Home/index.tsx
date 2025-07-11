@@ -26,37 +26,6 @@ export default function Home() {
   const [testResult, setTestResult] = useState<string>("");
   const [activeTab, setActiveTab] = useState<string>("home");
 
-  const { address } = useAccount();
-
-  const testAuth = async () => {
-    try {
-      // Get Quick Auth token
-      const { token } = await sdk.quickAuth.getToken();
-      console.log("token", token);
-
-      const res = await fetch("/api/test", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setTestResult(`Auth test failed: ${data.error}`);
-        return;
-      }
-
-      setTestResult(
-        `Auth test succeeded! Server response: ${data.message} (FID: ${data.fid})`
-      );
-    } catch (error) {
-      setTestResult(
-        "Auth test failed: " +
-          (error instanceof Error ? error.message : "Unknown error")
-      );
-    }
-  };
-
   const handleSpinResult = (result: string, miniApp?: any) => {
     console.log("Spin wheel result:", result);
     if (miniApp) {
@@ -136,7 +105,7 @@ export default function Home() {
             </TabsContent>
 
             <TabsContent value="hot-picks" className="mt-0">
-              <div className="mt-4">
+              <div className="mt-1 px-6">
                 <div className="text-center mb-8">
                   <h2
                     className={`text-3xl font-bold mb-4 ${londrina.className}`}

@@ -12,7 +12,6 @@ export const useQuickAuth = ({
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  console.log("came here");
 
   const {
     data: user,
@@ -25,8 +24,6 @@ export const useQuickAuth = ({
     queryKey: ["user"],
     enabled: isSignedIn,
   });
-
-  console.log("user111111111", user);
 
   const { mutate: signIn, isPending } = useApiMutation<
     { user: NeynarUser },
