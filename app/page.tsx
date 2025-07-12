@@ -8,7 +8,7 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/images/mam_icon_url.png`,
   button: {
-    title: "Launch App",
+    title: "Discover miniapps",
     action: {
       type: "launch_frame",
       name: "MM",

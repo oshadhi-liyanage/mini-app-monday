@@ -7,6 +7,7 @@ import { useApiQuery } from "@/hooks/use-api-query";
 import { AppWindow } from "lucide-react";
 import { sdk } from "@farcaster/frame-sdk";
 import { sdk as miniAppSdk } from "@farcaster/miniapp-sdk";
+import { Skeleton } from "./skeleton";
 
 interface MiniApp {
   id: string;
@@ -157,24 +158,10 @@ export function SpinWheel({
     }, 6000); // Match the CSS transition duration
   }, [attempts, isSpinning, clicks, onSpin, wheelSections]);
 
-  const resetWheel = () => {
-    setAttempts(maxAttempts);
-    setClicks(0);
-    setRotation(0);
-    setResult("");
-    setWinningMiniApp(null);
-    setIsSpinning(false);
-  };
-
   if (isLoading) {
     return (
       <div className={cn("flex flex-col items-center space-y-6", className)}>
-        <div className="text-center">
-          <div className="text-lg font-semibold text-gray-700 mb-4">
-            Loading Mini Apps...
-          </div>
-          <div className="w-64 h-64 rounded-full border-8 border-gray-200 animate-pulse" />
-        </div>
+        <Skeleton className="w-80 h-80 rounded-full bg-white/0 border border-gray-200/30" />
       </div>
     );
   }
@@ -196,8 +183,8 @@ export function SpinWheel({
 
   return (
     <div className={cn("flex flex-col items-center space-y-6", className)}>
-      <div className="text-center space-y-2">
-        {result && (
+      {result && (
+        <div className="text-center space-y-2">
           <div className="text-lg font-bold text-green-600 bg-green-50 px-4 py-2 rounded-lg space-y-3">
             <div>{result}</div>
             {winningMiniApp && (
@@ -236,8 +223,8 @@ export function SpinWheel({
               </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="relative w-80 h-80 mx-auto overflow-hidden">
         {/* Wheel Container */}

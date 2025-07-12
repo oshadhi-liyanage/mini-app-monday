@@ -191,7 +191,6 @@ export function MiniAppsList() {
       <Tabs
         value={activeTab}
         onValueChange={(value) => setActiveTab(value as SeasonType)}
-        className="mt-6"
       >
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="this-week">This Week</TabsTrigger>
