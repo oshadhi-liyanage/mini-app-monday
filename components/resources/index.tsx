@@ -43,7 +43,7 @@ const aiTools = [
     link: "https://www.anthropic.com/claude-code",
   },
   {
-    title: "V0",
+    title: "v0",
     link: "https://v0.dev/",
   },
   {
