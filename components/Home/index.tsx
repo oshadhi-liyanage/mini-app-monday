@@ -129,7 +129,7 @@ export default function Home() {
 
             {/* Bottom Navigation */}
             <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 z-10">
-              <TabsList className="grid w-full grid-cols-3 bg-transparent h-16 p-0 rounded-none">
+              <TabsList className="grid w-full grid-cols-3 bg-transparent h-16 pb-4 rounded-none">
                 <TabsTrigger
                   value="home"
                   className="flex flex-col items-center justify-center gap-1 h-full bg-transparent border-0 rounded-none p-0 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none hover:bg-transparent transition-colors"
