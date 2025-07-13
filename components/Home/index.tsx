@@ -7,7 +7,6 @@ import { sdk } from "@farcaster/frame-sdk";
 import { useQuickAuth } from "@/hooks/use-quick-auth";
 import { MiniAppsList } from "../dashboard/mini-apps";
 import { Londrina_Solid } from "next/font/google";
-import Routte from "../routte";
 import { SpinWheel } from "../ui/spin-wheel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Home as HomeIcon, Flame, Paperclip } from "lucide-react";
@@ -69,7 +68,6 @@ export default function Home() {
                 <span className="inline-block -mt-1">👋</span>
               </p>
             )}
-            {/* <Routte /> */}
           </div>
 
           <div className="text-center space-y-4">
