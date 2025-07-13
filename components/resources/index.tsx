@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ResourceCard from "../resource-card";
 
 const londrina = Londrina_Solid({
   weight: "400",
@@ -78,6 +79,24 @@ const externalApis = [
   },
 ];
 
+const docs = [
+  {
+    title: "Farcaster Mini Apps Docs",
+    link: "https://miniapps.farcaster.xyz/",
+  },
+  {
+    title: "dTech",
+    link: "https://dtech.vision/farcaster/",
+  },
+];
+
+const personalizedOnChainContent = [
+  {
+    title: "getembeded.ai",
+    link: "https://getembed.ai/",
+  },
+];
+
 export default function Resources() {
   return (
     <div className="mt-1 px-4">
@@ -93,158 +112,37 @@ export default function Resources() {
       <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
         Mini App Templates
       </h3>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
-        {templates.map((template, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden hover:shadow-lg transition-all duration-200"
-          >
-            <CardHeader className="pb-1">
-              <div className="flex items-center mb-1">
-                {/* {template.icon} */}
-                <CardTitle className="text-md flex items-center gap-2">
-                  {template.title}
-                  <a
-                    href={template.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <CardDescription className="text-sm leading-relaxed">
-                {template.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <ResourceCard cardData={templates} />
 
       <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
         AI tools
       </h3>
-
-      <div className="space-y-2 mb-4">
-        {aiTools.map((tool, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden hover:shadow-lg transition-all duration-200 "
-          >
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <CardTitle className="text-md flex items-center gap-2">
-                  {tool.title}
-                  <a
-                    href={tool.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </CardTitle>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+      <ResourceCard cardData={aiTools} />
 
       <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
         Deployment
       </h3>
-
-      <div className="space-y-2 mb-4">
-        {deployment.map((tool, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden hover:shadow-lg transition-all duration-200 "
-          >
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <CardTitle className="text-md flex items-center gap-2">
-                  {tool.title}
-                  <a
-                    href={tool.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </CardTitle>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+      <ResourceCard cardData={deployment} />
 
       <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
         Databases
       </h3>
-
-      <div className="space-y-2 mb-4">
-        {databases.map((tool, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden hover:shadow-lg transition-all duration-200 "
-          >
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <CardTitle className="text-md flex items-center gap-2">
-                  {tool.title}
-                  <a
-                    href={tool.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </CardTitle>
-              </div>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+      <ResourceCard cardData={databases} />
 
       <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
         External APIs
       </h3>
+      <ResourceCard cardData={externalApis} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {externalApis.map((api, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden hover:shadow-lg transition-all duration-200"
-          >
-            <CardHeader className="pb-1">
-              <div className="flex items-center mb-1">
-                <CardTitle className="text-md flex items-center gap-2">
-                  {api.title}
-                  <a
-                    href={api.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <CardDescription className="text-sm leading-relaxed">
-                {api.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
+        Documentation
+      </h3>
+      <ResourceCard cardData={docs} />
+
+      <h3 className={`text-xl font-bold mb-2 mt-1 ${londrina.className}`}>
+        Personalized On-Chain Content
+      </h3>
+      <ResourceCard cardData={personalizedOnChainContent} />
     </div>
   );
 }
